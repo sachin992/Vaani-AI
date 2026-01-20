@@ -1,10 +1,6 @@
 streamlit
 streamlit-mic-recorder
 python-dotenv
-
 openai
 langchain
 langchain-openai
-langchain-core
-
-pydub

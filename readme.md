@@ -1,139 +1,97 @@
-🎙️ Indian Language Speech Translator (Voice → Voice)
+# 🎙️ Vaani AI — Instant Voice Assistant
 
-A Streamlit-based multilingual speech translation app that allows users to record or upload audio, transcribe it using OpenAI Whisper, translate it into any Indian scheduled language using GPT, and generate spoken audio output using OpenAI Text-to-Speech.
+Vaani AI is a **stateless, real-time voice assistant** built using Streamlit and OpenAI.  
+It captures user speech, transcribes it accurately, processes the request using an LLM, and responds with natural AI-generated voice — all in a single interaction.
 
-This project focuses on Indian language accessibility, supporting 22+ Indian languages including Hindi, Maithili, Marathi, Tamil, Telugu, Bengali, and more.
+---
 
-🚀 Features
+## 🚀 Key Highlights
 
-🎤 Live voice recording using microphone
+- 🎤 Push-to-talk microphone input
+- 🗣️ High-accuracy speech-to-text using **OpenAI Whisper**
+- 🧠 Intelligent responses via **GPT (LangChain)**
+- 🔊 Natural AI voice output using **OpenAI Text-to-Speech**
+- 🌐 Language hint support (Hindi / English / Auto)
+- 🔒 Stateless & privacy-friendly (no history stored)
 
-📁 Audio file upload (WAV / MP3)
+---
 
-🧠 Speech-to-text transcription using OpenAI Whisper
+## 🧠 How Vaani AI Works
 
-🌍 Multilingual translation between Indian languages
+1. User records voice input
+2. Audio is transcribed using Whisper (`whisper-1`)
+3. Text is processed by GPT (no chat memory)
+4. AI response is converted to speech
+5. Audio response is played automatically
 
-🗣️ Text-to-speech generation for translated output
+Each interaction is **independent and ephemeral**.
 
-📥 Download translated audio
+---
 
-🧾 Native script support for target languages
+## 🛠️ Tech Stack
 
-⚡ Simple, clean Streamlit UI
+| Layer | Technology |
+|-----|-----------|
+| UI | Streamlit |
+| Audio Input | streamlit-mic-recorder |
+| Speech-to-Text | OpenAI Whisper |
+| LLM | OpenAI GPT via LangChain |
+| Text-to-Speech | OpenAI TTS |
+| Config | python-dotenv |
 
-🧩 Architecture Overview
-Audio Input (Mic / File)
-        ↓
-Whisper (Speech → Text)
-        ↓
-GPT Translation (Text → Target Language)
-        ↓
-OpenAI TTS (Text → Speech)
-        ↓
-Audio Playback & Download
+---
 
-🛠️ Tech Stack
+## 📦 Installation
 
-Frontend: Streamlit
-
-Speech-to-Text: OpenAI Whisper (whisper-1)
-
-Translation: OpenAI GPT (gpt-4o-mini)
-
-Text-to-Speech: OpenAI TTS (tts-1)
-
-Frameworks: LangChain
-
-Language: Python
-
-Audio Recorder: streamlit-mic-recorder
-
-🌐 Supported Languages (22+)
-
-Hindi, Bengali, Marathi, Telugu, Tamil, Gujarati, Urdu, Kannada, Odia, Malayalam, Punjabi, Assamese, Maithili, Santali, Kashmiri, Nepali, Konkani, Sindhi, Dogri, Manipuri, Bodo, Sanskrit, English
-
-⚠️ Note: TTS support for smaller dialects (e.g., Santali, Bodo) may be limited.
-
-📦 Installation
-1️⃣ Clone the Repository
-git clone https://github.com/sachin992/your-repo-name.git
-cd your-repo-name
-
-2️⃣ Create Virtual Environment (Optional)
-python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
-
-3️⃣ Install Dependencies
+### 1️⃣ Clone the Repository
+```bash
+git clone <your-repo-url>
+cd vaani-ai
+2️⃣ Install Dependencies
 pip install -r requirements.txt
 
-🔑 Environment Setup
+3️⃣ Configure Environment Variables
 
-Create a .env file in the root directory:
+Create a .env file in the project root:
 
-OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_API_KEY=your_openai_api_key
 
 ▶️ Run the Application
 streamlit run app.py
 
 
-Then open in browser:
+The application will open automatically in your browser.
 
-http://localhost:8501
+🎧 Usage Guide
 
-🧪 How to Use
+Select Input Language Hint (Hindi / English)
 
-Select source and target languages from sidebar
+Click 🎙️ Start Talking
 
-Record audio OR upload an audio file
+Speak your query
 
-Click “Transcribe & Translate”
+Click 🛑 Stop & Send
 
-View:
+Listen to the AI-generated voice response
 
-Original transcript
+⚙️ Configuration Notes
 
-Translated text
+Transcription language can be forced (e.g., Hindi) to avoid incorrect scripts
 
-Listen to translated speech
+Assistant responses are:
 
-Download the generated audio
+English only
 
-💰 Cost Considerations
-Component	Model	Cost
-Speech-to-Text	whisper-1	Low
-Translation	gpt-4o-mini	Very Low
-Text-to-Speech	tts-1	Low
+Maximum 2 sentences
 
-✔ Suitable for prototyping & demos
-✔ Can be optimized further for production
+Voice styles can be changed from the sidebar
 
-⚠️ Limitations
+🔐 Privacy & Design Philosophy
 
-Whisper requires reasonably clear audio
+❌ No conversation history
 
-Some Indian dialects may not have perfect TTS voices
+❌ No audio storage
 
-Internet connection required (OpenAI APIs)
+✅ Each request is processed independently
 
-Not fully offline
-
-🔮 Future Enhancements
-
-🔁 Real-time streaming translation
-
-📱 Mobile-friendly UI
-
-🗃️ Translation history
-
-🎧 Multiple voice options
-
-🧠 Fine-tuned language models for Indian dialects
-
-👨‍💻 Author
-
-Sachin Raj
-
-GitHub: https://github.com/sachin992
-
-LinkedIn: https://www.linkedin.com/in/sachin-raj-3090481b0
+Vaani AI is designed for fast, private, and disposable voice interactions.
