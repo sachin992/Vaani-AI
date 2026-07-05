@@ -1,6 +1,7 @@
-streamlit
-streamlit-mic-recorder
-python-dotenv
-openai
-langchain
-langchain-openai
+streamlit==1.38.0
+streamlit-mic-recorder==0.0.8
+python-dotenv==1.0.1
+openai==1.51.2
+langchain==0.2.16
+langchain-openai==0.1.23
+langchain-core==0.2.38

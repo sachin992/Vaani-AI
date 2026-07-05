@@ -1,97 +1,130 @@
-# 🎙️ Vaani AI — Instant Voice Assistant
+# Vaani AI - GenAI Voice Assistant
 
-Vaani AI is a **stateless, real-time voice assistant** built using Streamlit and OpenAI.  
-It captures user speech, transcribes it accurately, processes the request using an LLM, and responds with natural AI-generated voice — all in a single interaction.
+Vaani AI is a real-time, stateless voice assistant that converts spoken input into a short, high-quality AI response and plays it back as synthesized speech.
 
----
+## What I Implemented as a GenAI Engineer
 
-## 🚀 Key Highlights
+1. End-to-end voice AI pipeline
+- Mic capture in browser UI
+- Speech-to-text transcription
+- LLM response generation
+- Text-to-speech voice output
 
-- 🎤 Push-to-talk microphone input
-- 🗣️ High-accuracy speech-to-text using **OpenAI Whisper**
-- 🧠 Intelligent responses via **GPT (LangChain)**
-- 🔊 Natural AI voice output using **OpenAI Text-to-Speech**
-- 🌐 Language hint support (Hindi / English / Auto)
-- 🔒 Stateless & privacy-friendly (no history stored)
+2. Production-focused prompt and response control
+- Structured system prompt for concise, professional responses
+- English-only answer constraint
+- Low-latency, short output behavior for voice UX
 
----
+3. Multilingual input robustness
+- Input language hint support: Auto-detect, Hindi, English
+- Optional forced language code for more accurate transcription
 
-## 🧠 How Vaani AI Works
+4. Stateless conversation design
+- One-shot interaction model with no conversation memory
+- Better privacy and predictable behavior per request
 
-1. User records voice input
-2. Audio is transcribed using Whisper (`whisper-1`)
-3. Text is processed by GPT (no chat memory)
-4. AI response is converted to speech
-5. Audio response is played automatically
+5. Audio quality and reliability safeguards
+- Short/unclear audio rejection handling
+- Temporary file lifecycle management and cleanup
+- User-facing status updates for each pipeline stage
 
-Each interaction is **independent and ephemeral**.
+6. Deployability and developer experience
+- Dockerfile + docker-compose setup
+- Environment-variable based configuration
+- Minimal dependency setup for quick local start
 
----
+## Tech Stack Used
 
-## 🛠️ Tech Stack
+### GenAI APIs and Models
+- OpenAI Whisper (`whisper-1`) for speech-to-text
+- OpenAI GPT model (`gpt-4o-mini` via LangChain) for response generation
+- OpenAI TTS (`tts-1`) for speech synthesis
 
-| Layer | Technology |
-|-----|-----------|
-| UI | Streamlit |
-| Audio Input | streamlit-mic-recorder |
-| Speech-to-Text | OpenAI Whisper |
-| LLM | OpenAI GPT via LangChain |
-| Text-to-Speech | OpenAI TTS |
-| Config | python-dotenv |
+### Frameworks and Libraries
+- Streamlit (web app UI)
+- streamlit-mic-recorder (microphone capture)
+- LangChain + langchain-openai + langchain-core (LLM orchestration)
+- OpenAI Python SDK (model/API access)
+- python-dotenv (environment variable loading)
 
----
+### Runtime and Deployment
+- Python 3.11+
+- Docker and Docker Compose
 
-## 📦 Installation
+## Project Structure
 
-### 1️⃣ Clone the Repository
+```text
+.
+|- app.py
+|- requirements.txt
+|- Dockerfile
+|- docker-compose.yml
+`- docs/
+```
+
+## Quick Start (Local)
+
+1. Clone and enter the project directory.
+
 ```bash
 git clone <your-repo-url>
-cd vaani-ai
-2️⃣ Install Dependencies
+cd Vaani-AI
+```
+
+2. Create and activate a virtual environment.
+
+```bash
+python -m venv .venv
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+# macOS/Linux
+source .venv/bin/activate
+```
+
+3. Install dependencies.
+
+```bash
 pip install -r requirements.txt
+```
 
-3️⃣ Configure Environment Variables
+4. Create a `.env` file in the project root.
 
-Create a .env file in the project root:
-
+```env
 OPENAI_API_KEY=your_openai_api_key
+```
 
-▶️ Run the Application
+5. Run the app.
+
+```bash
 streamlit run app.py
+```
 
+6. Open http://localhost:8501
 
-The application will open automatically in your browser.
+## Docker
 
-🎧 Usage Guide
+### Option 1: Docker CLI
 
-Select Input Language Hint (Hindi / English)
+```bash
+docker build -t vaani-ai .
+docker run --rm -p 8501:8501 --env-file .env vaani-ai
+```
 
-Click 🎙️ Start Talking
+### Option 2: Docker Compose
 
-Speak your query
+```bash
+docker compose up --build
+```
 
-Click 🛑 Stop & Send
+## Environment Variable
 
-Listen to the AI-generated voice response
+- `OPENAI_API_KEY` (required): Used for STT, LLM, and TTS API calls.
 
-⚙️ Configuration Notes
+## Current Architecture Flow
 
-Transcription language can be forced (e.g., Hindi) to avoid incorrect scripts
-
-Assistant responses are:
-
-English only
-
-Maximum 2 sentences
-
-Voice styles can be changed from the sidebar
-
-🔐 Privacy & Design Philosophy
-
-❌ No conversation history
-
-❌ No audio storage
-
-✅ Each request is processed independently
-
-Vaani AI is designed for fast, private, and disposable voice interactions.
+1. Record voice using push-to-talk.
+2. Validate and persist temporary audio.
+3. Transcribe speech to text with Whisper.
+4. Generate concise answer via LLM.
+5. Synthesize answer to speech with TTS.
+6. Return both text response and autoplay audio.
