@@ -1,5 +1,7 @@
 # Vaani AI - GenAI Voice Assistant
 
+![Vaani AI Screenshot](docs/image.png)
+
 Vaani AI is a real-time, stateless voice assistant that converts spoken input into a short, high-quality AI response and plays it back as synthesized speech.
 
 ## What I Implemented as a GenAI Engineer
